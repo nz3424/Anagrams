@@ -146,6 +146,9 @@ function startTimer() {
 function endGame(){
     endScore.innerHTML = currentScore;
     endScreen.style.display = "block";
+  //  if (currentScore < 1000) {
+  //      document.querySelector("#message").innerHTML = "Hit the dictionary bot"
+  //  }
 }
 
 function restartGame() {
