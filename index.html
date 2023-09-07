@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir = "ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anagrams</title>
+  <link rel="stylesheet" type = "text/css" href="./index.css">
+  <script src="./index.js" defer></script>
+</head>
+
+<body onload="displayLetters()">
+  <div class="container">
+    <h1 class = "title">Anagrams</h1>
+    <div class = "timer">
+      <p>Time Left: <span><b id = "timertext">30s</b></span></p>
+    </div>
+    <div class = "feedback">
+      <center><p class = "score" id="s"></p></center>
+    </div>
+    <div class = "squares"> 
+      <button class = "square" onclick = "removeLetter(1)" id = "squareID1" ></button>
+      <button class = "square" onclick = "removeLetter(2)" id = "squareID2"></button>
+      <button class = "square" onclick = "removeLetter(3)" id = "squareID3"></button>
+      <button class = "square" onclick = "removeLetter(4)" id = "squareID4"></button>
+      <button class = "square" onclick = "removeLetter(5)" id = "squareID5"></button>
+      <button class = "square" onclick = "removeLetter(6)" id = "squareID6"></button>
+
+    </div>
+    <div class = "letters">
+      <center>
+      <button onclick = "display(1)" id = "l1"></button>
+      <button onclick = "display(2)" id = "l2"></button>
+      <button onclick ="display(3)"id = "l3"></button>
+      <button onclick = "display(4)"id = "l4"></button>
+      <button onclick = "display(5)"id = "l5"></button>
+      <button onclick = "display(6)"id = "l6"></button>
+    </center>
+      </div>
+  <div class = "buttons">
+    <center>
+    <button onClick = "reset()"> Reset</button>
+    <button onClick = "enter()"> Enter</button>
+  </center>
+   </div>
+    <center><p class = "currscore" id="cs">Score: 0</p></center>
+   </div>
+
+   <div class = "startScreen" id = "startScreen">
+    <label>Anagrams!</label>
+    <button onClick = "startGame()"> Start</button>
+    <p style = "font-size: 15px; font-weight: lighter; padding-top: 300px; margin-bottom:0px; "> A game made by Nick</p>
+    <p style = "font-size: 10px; font-weight: lighter; margin-top: 0px; top: 100%;"> EddieCantBeatMe Inc.</p>
+
+  </div>
+  
+  <div class = "gameOver" id = "gameOver">
+    <label>Game over</label>
+    <h1 class = "endScore" id = "endScore">0</h1>
+    <p >Points</p>
+    <button onClick = "restartGame()"> Play again</button>
+    <h1 class = "wordresults" id = "wordresults"> 
+    <!-- -->
+    </h1>
+  </div>
+</body>
+</html>
+

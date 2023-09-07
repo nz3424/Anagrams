@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    background: rgb(248, 240, 128);
+  }
+
+.startScreen{
+    display: block;
+    position:absolute;
+    background-color: rgb(248, 240, 128);
+    width : 100%;
+    height: 100%;
+    padding-top: 400px;
+    text-align: center;
+    font-size: 90px;
+    font-weight: bolder;
+    margin-top:8px;
+}
+.startScreen h1{
+    position:absolute;
+    background-color: rgb(248, 240, 128);
+    width : 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 90px;
+    margin-top:8px;
+}
+
+.startScreen button{
+    cursor: pointer;
+    background-color: rgb(248, 240, 128);
+    box-shadow:0 0 5px rgb(117, 113, 63);
+    border: none;
+    position: absolute;
+    width : 20%;
+    height: 80px;
+    left: 40%;
+    top: 50%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.gameOver{
+    display: none;
+    position:absolute;
+    background-color: rgb(248, 240, 128);
+    width : 100%;
+    height: 100%;
+    padding-top: 40px;
+    text-align: center;
+    font-size: 30px;
+    margin-top:8px;
+    margin-bottom:0px;
+}
+
+.gameover .wordresults{
+    position:absolute;
+    background-color: rgb(248, 240, 128);
+    width : 100%;
+    height: 100%;
+    color: black;
+    text-align: center;
+    font-size: 100px;
+    margin-top:8px;
+}
+
+.gameOver .endScore{
+    position:absolute;
+    background-color: rgb(248, 240, 128);
+    width : 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 90px;
+    margin-top:8px;
+}
+.gameOver p{
+    padding-top: 20px;
+    position: absolute;
+    width : 100%;
+    height: 100%;
+    top: 21%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.gameOver button{
+    cursor: pointer;
+    background-color: rgb(248, 240, 128);
+    box-shadow:0 0 5px rgb(117, 113, 63);
+    border: none;
+    position: absolute;
+    width : 20%;
+    height: 50px;
+    left: 40%;
+    top: 80%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+
+}
+.container{
+    width : 1000px;
+    background: rgb(248, 240, 128);
+}
+.container .title {
+    font-size: 45px;
+    margin-bottom: 5px;
+}
+.timer {
+    color: #000000;
+}
+.timer p{
+    font-size: 20px;
+    margin-bottom:5px;
+    margin-top:0px;
+}
+.feedback .score{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(248, 240, 128);
+    width: 10%;
+    border-radius: 15px;
+    height :50px;
+    margin-bottom : 10px;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    text-underline-position:20px ;
+    padding-top:20px;
+  }
+ .currscore{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top:5px;
+  }
+
+.container .subheading{
+    font-size : 10px;
+    font-weight: bold;
+}
+
+
+.squares button{
+    border: none;
+    outline: none;
+    color: #000000;
+    background: #e7e7e7;
+    padding: 15px 0;
+    border-radius: 5px;
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    width: calc(100% / 6 - 10px);
+    height: 180px;
+    float: left;
+    transition: all 0.3s ease;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+
+.letters button{
+    border: none;
+    outline: none;
+    color: #000000;
+    background: #ffffff;
+    cursor: pointer;
+    padding: 15px 0;
+    font-size: 17px;
+    border-radius: 5px;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    width: calc(100% / 6 - 10px);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.buttons button{
+    border: none;
+    outline: none;
+    background: #ffffff;
+    cursor: pointer;
+    padding: 15px 0;
+    font-size: 17px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    width: 150px;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+
+
