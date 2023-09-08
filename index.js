@@ -13,7 +13,8 @@ const WEIGHTED = [17, 5, 4, 4,20, 5, 4, 5, 7, 2, 5, 7, 5, 6, 6, 15, 1, 8, 15, 7,
 
 
 const scores = [0, 100, 200, 400, 800, 1200, 2000]
-var letters = ["", "", "", "", ""]
+var letters = ["", "", "", "", "", ""]
+var letterindices = ["", "", "", "", "", ""]
 var currentScore = 0
 var currentWord = ""
 var currentWords = {}
@@ -33,31 +34,42 @@ function display(i) {
     if(!document.getElementById('squareID1').innerHTML) {
         document.getElementById('squareID1').innerHTML = letter;
         document.getElementById('squareID1').style.backgroundColor= "#bcf5bc";
+        letterindices[0] = i
     }
     else if(!document.getElementById('squareID2').innerHTML) {
         document.getElementById('squareID2').innerHTML = letter;
         document.getElementById('squareID2').style.backgroundColor= "#bcf5bc";
+        letterindices[1] = i
+
     }
     else if(!document.getElementById('squareID3').innerHTML) {
         document.getElementById('squareID3').innerHTML = letter;
         document.getElementById('squareID3').style.backgroundColor= "#bcf5bc";
+        letterindices[2] = i
+
     }
     else if(!document.getElementById('squareID4').innerHTML) {
         document.getElementById('squareID4').innerHTML = letter;
         document.getElementById('squareID4').style.backgroundColor= "#bcf5bc";
+        letterindices[3] = i
 
     }
     else if (!document.getElementById('squareID5').innerHTML){
         document.getElementById('squareID5').innerHTML = letter;
         document.getElementById('squareID5').style.backgroundColor= "#bcf5bc";
+        letterindices[4] = i
+
 
     }
     else if (!document.getElementById('squareID6').innerHTML){
         document.getElementById('squareID6').innerHTML = letter;
         document.getElementById('squareID6').style.backgroundColor= "#bcf5bc";
+        letterindices[5] = i
+
 
     }
     disableLetter(i);
+    document.getElementById("s").innerHTML = letterindices[0] + letterindices[1]  + letterindices[2] + letterindices[3] + letterindices[4] + letterindices[5] 
     if (count < 6){
     count += 1
     currentWord+= letter.toLowerCase()
@@ -75,19 +87,20 @@ function disableLetter(i){
 
 // remove letter by clicking
 function removeLetter(i) {
+    if (count == i){
     var square = document.getElementById("squareID" + String(i));
-
-    // NEED TO FIX WHAT HAPPENS WITH MULTIPLE LETTERS
     var index = letters.indexOf(square.innerHTML)
-    var letter = document.getElementById("l" + String(index+1));
+    var letter = document.getElementById("l" + letterindices[i-1]);
     currentWord -= square.innerHTML
     count -= 1
     square.innerHTML = ""
+    letterindices[i-1] = ""
     square.style.backgroundColor="#e7e7e7";
 
     letter.disabled = false;
     letter.innerHTML = letters[index];
     letter.style.backgroundColor  = "#ffffff";
+}
 }
 
 // resets the board
