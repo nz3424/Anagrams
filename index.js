@@ -69,7 +69,6 @@ function display(i) {
 
     }
     disableLetter(i);
-    document.getElementById("s").innerHTML = letterindices[0] + letterindices[1]  + letterindices[2] + letterindices[3] + letterindices[4] + letterindices[5] 
     if (count < 6){
     count += 1
     currentWord+= letter.toLowerCase()
