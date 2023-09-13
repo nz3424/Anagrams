@@ -8,11 +8,11 @@ const WORDS = JSON.parse(
     
     const CHARARRAY = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X","Y", "Z"]
     
-    const WEIGHTED = [17, 5, 4, 4,20, 5, 4, 5, 7, 2, 5, 7, 5, 6, 6, 15, 1, 8, 15, 7, 5, 2, 3, 1,
+    const WEIGHTED = [17, 5, 4, 4,20, 5, 4, 5, 7, 2, 5, 7, 5, 6, 6, 15, 1, 8, 15, 10, 5, 2, 3, 1,
     5,1]
     
     
-    const scores = [0, 100, 200, 400, 800, 1200, 2000]
+    const scores = [0, 0, 200, 400, 800, 1200, 2000]
     var letters = ["", "", "", "", "", ""]
     var letterindices = ["", "", "", "", "", ""]
     var currentScore = 0
@@ -266,10 +266,10 @@ const WORDS = JSON.parse(
     
     // when you hit 'enter'
     function enter() {
-        if (count > 0 && currentWord in WORDS && !(currentWord in words)){
-            document.getElementById("s").innerHTML = "+" + (scores[count]);
+        if (count > 2 && currentWord in WORDS && !(currentWord in words)){
+            document.getElementById("s").innerHTML = "+" + (scores[count-1]);
             document.getElementById("s").style.backgroundColor= "#bcf5bc";
-            currentScore += scores[count]
+            currentScore += scores[count-1]
             document.getElementById("cs").innerHTML = String("Score: " + currentScore);
             currentWords.push({word: currentWord, score: scores[count]});
             words[currentWord] = 1;
