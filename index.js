@@ -4,7 +4,7 @@ const WORDS = JSON.parse(
     
     
     var count = 0
-    const TIME = 10
+    const TIME = 30
     
     const CHARARRAY = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X","Y", "Z"]
     
