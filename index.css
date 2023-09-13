@@ -48,7 +48,7 @@ body{
 
 }
 
-.gameOver{
+.gameOver {
     display: none;
     position:absolute;
     background-color: rgb(248, 240, 128);
@@ -56,41 +56,74 @@ body{
     height: 100%;
     padding-top: 40px;
     text-align: center;
-    font-size: 30px;
     margin-top:8px;
     margin-bottom:0px;
 }
 
-.gameover .wordresults{
-    position:absolute;
-    background-color: rgb(248, 240, 128);
-    width : 100%;
-    height: 100%;
-    color: black;
-    text-align: center;
-    font-size: 100px;
-    margin-top:8px;
+.gameOver label{
+    font-size: 30px;
 }
-
-.gameOver .endScore{
-    position:absolute;
-    background-color: rgb(248, 240, 128);
-    width : 100%;
-    height: 100%;
+.gameOver h1{
+    margin-top: -20px;
+    font-size: 90px;
+}
+.endScore h1{
+    display:flex;
     text-align: center;
     font-size: 90px;
-    margin-top:8px;
 }
+
 .gameOver p{
-    padding-top: 20px;
     position: absolute;
     width : 100%;
     height: 100%;
-    top: 21%;
+    top: 20%;
     text-align: center;
     font-size: 20px;
     font-weight: 400;
 }
+
+.lboard{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+    margin: 5% 25%;
+}
+
+.leaderboard-results{
+    margin-top: -4%;
+    display: flex;
+    flex-wrap:wrap;
+    width: 50%;
+    box-shadow:0 0 5px rgb(117, 113, 63);
+    border-radius: 15px;
+    text-align:left;
+    border-collapse: collapse;
+}
+
+
+.leaderboard-results tr {
+    font-size:30px;
+  }
+
+.leaderboard-results tr th {
+    font-size:30px;
+    font-weight:bold;
+
+  }
+.leaderboard-results thead th {
+    width: 500px;
+    padding: 5px 0px 0px 150px;
+    font-size:20px;
+    font-weight:bold;
+
+  }
+
+.leaderboard-results tbody td {
+    width: 500px;
+    padding: 5px 0px 0px 155px;
+    font-size:20px;
+  }
 
 .gameOver button{
     cursor: pointer;
@@ -101,7 +134,7 @@ body{
     width : 20%;
     height: 50px;
     left: 40%;
-    top: 80%;
+    top: 85%;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -109,6 +142,7 @@ body{
     font-family: 'Poppins', sans-serif;
 
 }
+
 .container{
     width : 1000px;
     background: rgb(248, 240, 128);
@@ -145,6 +179,7 @@ body{
     margin-bottom: 10px;
     margin-top:5px;
   }
+
 
 .container .subheading{
     font-size : 10px;

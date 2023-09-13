@@ -45,6 +45,7 @@
     <center><p class = "currscore" id="cs">Score: 0</p></center>
    </div>
 
+   
    <div class = "startScreen" id = "startScreen">
     <label>Anagrams!</label>
     <button onClick = "startGame()"> Start</button>
@@ -53,14 +54,28 @@
 
   </div>
   
-  <div class = "gameOver" id = "gameOver">
+  
+  <div class = "gameOver" id = "gameOver" >
     <label>Game over</label>
     <h1 class = "endScore" id = "endScore">0</h1>
     <p>Points</p>
+    <div class = "lboard" id = "lboard"> 
+      <table id="rankings" class="leaderboard-results">
+        <thead>
+          <tr>
+            <th>Word</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody id = "tbody" style = "height: 320px; overflow-y: auto;">
+        </tbody>
+      </table>
+      </div>
     <button onClick = "restartGame()"> Play again</button>
-    <h1 class = "wordresults" id = "wordresults"> 
+  
+      
     <!-- -->
-    </h1>
+    </div>
   </div>
 </body>
 </html>
