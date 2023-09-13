@@ -7,6 +7,8 @@ body{
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     background: rgb(248, 240, 128);
+    height: 100%;
+    width: 100%;
   }
 
 .startScreen{
@@ -15,19 +17,24 @@ body{
     background-color: rgb(248, 240, 128);
     width : 100%;
     height: 100%;
-    padding-top: 400px;
     text-align: center;
-    font-size: 90px;
     font-weight: bolder;
     margin-top:8px;
 }
-.startScreen h1{
-    position:absolute;
-    background-color: rgb(248, 240, 128);
-    width : 100%;
-    height: 100%;
+.startScreen label{
+    position:relative;
+    top: 30%;
     text-align: center;
     font-size: 90px;
+}
+
+.startScreen p{
+    position:relative;
+    top: 70%;
+    height: 1%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 12px;
 }
 
 .startScreen button{
