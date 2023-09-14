@@ -4,7 +4,7 @@ const WORDS = JSON.parse(
     
     
     var count = 0
-    const TIME = 30
+    const TIME = 10
     
     const CHARARRAY = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X","Y", "Z"]
     
@@ -27,7 +27,7 @@ const WORDS = JSON.parse(
     const endScore = document.querySelector("#endScore");
     const timeH = document.getElementById("timertext");
     
-    
+
     
     
     // display the character that is clicked
@@ -155,14 +155,19 @@ const WORDS = JSON.parse(
         
     }
     
-    const rankingsBody = document.getElementById("tbody");
+    const rankingsBody = document.getElementById("tablebody");
+    const tbl =  document.getElementById("leaderbord_results");
+
+
     function loadRankings () {
         const json = JSON.parse(currentWords);
         populateRankings(json);
     }
     
-    const table = document.getElementById("tbody");
+
+    
     function populateRankings(items){
+        const table = document.getElementById("tablebody");
         items.forEach(item => {
                 const tr = document.createElement("tr");
                 const word = document.createElement("td");
@@ -173,23 +178,24 @@ const WORDS = JSON.parse(
                 tr.appendChild(score);
         table.append(tr)
         })
-    
     }
-    function populateRankings2 (json) {
-            // Populate Leaderboard
-            json.forEach((row) => {
-                const tr = document.createElement("tr");
-        
-                row.forEach((cell) => {
-                    const td = document.createElement("td");
-                    td.textContent = cell;
-                    tr.appendChild(td);
-                });
-        
-                rankingsBody.appendChild(tr);
-            });
+    
+    function resetTable(){
+        var tableHeaderRowCount = 1;
+        var rowCount = document.getElementById("tablebody").rows.length;
+        for (var i = tableHeaderRowCount; i < rowCount; i++) {
+            document.getElementById("tbody").deleteRow(tableHeaderRowCount);
         }
-        
+        //  wrapperDom.appendChild(tablDom);
+    }
+
+    function resetTable2(){
+        const old_tbody = document.getElementById("tablebody")
+        const new_tbody = document.createElement('tbody');
+        new_tbody.setAttribute("id", "tablebody")
+        old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+    }
+  
     // end game, restart game
     function endGame(){
         populateRankings(currentWords);
@@ -200,8 +206,11 @@ const WORDS = JSON.parse(
       //      document.querySelector("#message").innerHTML = "Hit the dictionary bot"
       //  }
     }
+
     
     function restartGame() {
+        currentWords = [];
+        resetTable2();
         endScreen.style.display = "none";
         timeH.style.color = "black";
         timeH.innerHTML = TIME + "s"
@@ -266,12 +275,12 @@ const WORDS = JSON.parse(
     
     // when you hit 'enter'
     function enter() {
-        if (count > 2 && currentWord in WORDS && !(currentWord in words)){
+        if (count > 2 && (currentWord in WORDS) && !(currentWord in words)){
             document.getElementById("s").innerHTML = "+" + (scores[count-1]);
             document.getElementById("s").style.backgroundColor= "#bcf5bc";
             currentScore += scores[count-1]
             document.getElementById("cs").innerHTML = String("Score: " + currentScore);
-            currentWords.push({word: currentWord, score: scores[count]});
+            currentWords.push({word: currentWord, score: scores[count-1]});
             words[currentWord] = 1;
             setTimeout(function(){
                 document.getElementById("s").innerHTML = ''
