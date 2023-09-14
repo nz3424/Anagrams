@@ -167,6 +167,9 @@ const WORDS = JSON.parse(
 
     
     function populateRankings(items){
+        items.sort(function(a, b) { 
+            return b.score - a.score || a.word - b.word;
+        })
         const table = document.getElementById("tablebody");
         items.forEach(item => {
                 const tr = document.createElement("tr");
@@ -180,16 +183,8 @@ const WORDS = JSON.parse(
         })
     }
     
-    function resetTable(){
-        var tableHeaderRowCount = 1;
-        var rowCount = document.getElementById("tablebody").rows.length;
-        for (var i = tableHeaderRowCount; i < rowCount; i++) {
-            document.getElementById("tbody").deleteRow(tableHeaderRowCount);
-        }
-        //  wrapperDom.appendChild(tablDom);
-    }
 
-    function resetTable2(){
+    function resetTable(){
         const old_tbody = document.getElementById("tablebody")
         const new_tbody = document.createElement('tbody');
         new_tbody.setAttribute("id", "tablebody")
@@ -210,35 +205,37 @@ const WORDS = JSON.parse(
     
     function restartGame() {
         currentWords = [];
-        resetTable2();
+        resetTable();
         endScreen.style.display = "none";
         timeH.style.color = "black";
         timeH.innerHTML = TIME + "s"
         startGame();
     }
-    
-    
-    // FIGURE OUT HOW TO GET THIS TO WORK
-    // keyboard input
+
+
     document.addEventListener("keyup", (e) => {
         if (count > 6) {
             return
         }
-        let pressedKey = String(e.key)
-       // if (pressedKey === "Backspace" && nextLetter !== 0) {
-       //     deleteLetter()
-       //     return
-       // }
-    
-        if (pressedKey == "Enter") {
-            enter()
+        let pressedKey = (e.key)
+        let strPressedKey = String(pressedKey)
+        if (strPressedKey === "Backspace" && count !== 0) {
+            removeLetter(count)
             return
         }
     
-        let found = pressedKey.match(/[a-z]/gi)
-        if (!found || found.length > 1) {
+        if (strPressedKey === "Enter") {
+            enter()
             return
-        } else {
+        }
+
+        // FIGURE OUT DUPLICATES
+        if (pressedKey < 97 || pressedKey > 122) {
+            return
+        } else if (!(strPressedKey in lettertoindex)) {
+            return
+        }
+        else {
             display(lettertoindex[pressedKey])
         }
     })
@@ -268,7 +265,7 @@ const WORDS = JSON.parse(
             //var randomChar = CHARARRAY[Math.floor( Math.random() * CHARARRAY.length)]
             letters[i-1] = randomChar
             document.getElementById(id).innerHTML = randomChar
-            lettertoindex[randomChar] = i
+            lettertoindex[randomChar.toLowerCase()] = i
         }
     }
     
