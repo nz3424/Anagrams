@@ -4,21 +4,36 @@ const WORDS = JSON.parse(
     
     
     var count = 0
-    const TIME = 30
+    const TIME = 10
     
     const CHARARRAY = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X","Y", "Z"]
-    
+
+    // array for weights
     const WEIGHTED = [17, 5, 4, 4,20, 5, 4, 5, 7, 2, 5, 7, 5, 6, 6, 15, 1, 8, 15, 10, 5, 2, 3, 1,
     5,1]
     
-    
+    // array for scores
     const scores = [0, 0, 200, 400, 800, 1200, 2000]
+
+    // letters
     var letters = ["", "", "", "", "", ""]
+
+    // indices of letter[i] on the current board
     var letterindices = ["", "", "", "", "", ""]
+
+    // current score
     var currentScore = 0
+
+    // current word (as typing)
     var currentWord = ""
+
+    // list of objects: {word: <word>, score: <score>}
     var currentWords = []
+
+    // all words used
     var words = {}
+
+    // maps letter to its index in the list
     var lettertoindex = {}
     
     
@@ -86,22 +101,23 @@ const WORDS = JSON.parse(
         document.getElementById("l" + String(i)).disabled = true;
     }
     
-    // remove letter by clicking
+
+
+    // remove letter i by clicking
     function removeLetter(i) {
         if (count == i){
-        var square = document.getElementById("squareID" + String(i));
-        var index = letters.indexOf(square.innerHTML)
-        var letter = document.getElementById("l" + letterindices[i-1]);
-        currentWord -= square.innerHTML
-        count -= 1
-        square.innerHTML = ""
-        letterindices[i-1] = ""
-        square.style.backgroundColor="#e7e7e7";
-    
-        letter.disabled = false;
-        letter.innerHTML = letters[index];
-        letter.style.backgroundColor  = "#ffffff";
-    }
+            var square = document.getElementById("squareID" + String(i));
+            var letter = document.getElementById("l" + letterindices[i-1]);
+            currentWord = currentWord.substring(0, count-1);
+            //document.getElementById("s").innerHTML = currentWord
+            count -= 1;
+            square.innerHTML = ""
+            letter.innerHTML = letters[letterindices[i-1]-1];
+            letterindices[i-1] = ""
+            square.style.backgroundColor="#e7e7e7";
+            letter.disabled = false;
+            letter.style.backgroundColor  = "#ffffff";
+        }
     }
     
     // resets the board
@@ -122,6 +138,7 @@ const WORDS = JSON.parse(
     
     // start game
     function startGame() {
+        count = 0;
         startScreen.style.display = "none";
         startTimer()
     }
@@ -168,7 +185,7 @@ const WORDS = JSON.parse(
     
     function populateRankings(items){
         items.sort(function(a, b) { 
-            return b.score - a.score || a.word - b.word;
+            return b.score - a.score || b.word - a.word;
         })
         const table = document.getElementById("tablebody");
         items.forEach(item => {
@@ -197,14 +214,18 @@ const WORDS = JSON.parse(
         endScore.innerHTML = currentScore;
         endScreen.style.display = "block";
        // loadRankings();
-      //  if (currentScore < 1000) {
-      //      document.querySelector("#message").innerHTML = "Hit the dictionary bot"
-      //  }
+        if (currentScore < 1000) {
+            document.querySelector("#message").innerHTML = "Hit the dictionary kid"
+        }
+        else {
+            document.querySelector("#message").innerHTML = ""
+        }
     }
 
     
     function restartGame() {
         currentWords = [];
+        currentWord = ""
         resetTable();
         endScreen.style.display = "none";
         timeH.style.color = "black";
@@ -215,27 +236,32 @@ const WORDS = JSON.parse(
 
     document.addEventListener("keyup", (e) => {
         if (count > 6) {
+            document.getElementById("s").innerHTML = "p0";
             return
         }
         let pressedKey = (e.key)
         let strPressedKey = String(pressedKey)
+        // issue with delete
         if (strPressedKey === "Backspace" && count !== 0) {
+            document.getElementById("s").innerHTML = "P2";
             removeLetter(count)
             return
         }
-    
-        if (strPressedKey === "Enter") {
+        else if (strPressedKey === "Enter") {
+            document.getElementById("s").innerHTML = "P3";
             enter()
             return
         }
-
         // FIGURE OUT DUPLICATES
         if (pressedKey < 97 || pressedKey > 122) {
+            document.getElementById("s").innerHTML = "p9";
             return
-        } else if (!(strPressedKey in lettertoindex)) {
+        } else if (!(strPressedKey in lettertoindex) || currentWord.includes(strPressedKey)) {
+            document.getElementById("s").innerHTML = "p7";
             return
         }
         else {
+            document.getElementById("s").innerHTML = "PRESSED";
             display(lettertoindex[pressedKey])
         }
     })
@@ -265,9 +291,14 @@ const WORDS = JSON.parse(
             //var randomChar = CHARARRAY[Math.floor( Math.random() * CHARARRAY.length)]
             letters[i-1] = randomChar
             document.getElementById(id).innerHTML = randomChar
-            lettertoindex[randomChar.toLowerCase()] = i
-        }
+            if (randomChar.toLowerCase() in lettertoindex) {
+                lettertoindex[randomChar.toLowerCase()] = i
+            }
+            else {
+                lettertoindex[randomChar.toLowerCase()] = i
+            }
     }
+}
     
     
     // when you hit 'enter'
@@ -283,7 +314,7 @@ const WORDS = JSON.parse(
                 document.getElementById("s").innerHTML = ''
                 document.getElementById("s").style.backgroundColor =  'rgb(248, 240, 128)';
                 ;
-            }, 1000);
+            }, 750);
         }
         reset()
     }
