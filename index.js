@@ -4,7 +4,7 @@ const WORDS = JSON.parse(
     
     
     var count = 0
-    const TIME = 10
+    const TIME = 30
     
     const CHARARRAY = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X","Y", "Z"]
 
@@ -35,6 +35,9 @@ const WORDS = JSON.parse(
 
     // maps letter to its index in the list
     var lettertoindex = {}
+    
+    // pointers used to help with duplicate values in keyboard
+    var pointers = {}
     
     
     const endScreen = document.querySelector("#gameOver");
@@ -111,6 +114,7 @@ const WORDS = JSON.parse(
             currentWord = currentWord.substring(0, count-1);
             //document.getElementById("s").innerHTML = currentWord
             count -= 1;
+            pointers[letter] -= 1
             square.innerHTML = ""
             letter.innerHTML = letters[letterindices[i-1]-1];
             letterindices[i-1] = ""
@@ -124,6 +128,9 @@ const WORDS = JSON.parse(
     function reset() {
         count = 0
         currentWord = ""
+        for (var key in pointers) {
+            pointers[key] = 0
+        }
         for (let i = 1; i < 7; i++){
             var id = 'squareID' + String(i);
             document.getElementById(id).innerHTML = "";
@@ -141,6 +148,9 @@ const WORDS = JSON.parse(
         count = 0;
         startScreen.style.display = "none";
         startTimer()
+        currentScore = 0
+        displayLetters()
+        reset()
     }
     
     // starts the timer
@@ -166,9 +176,7 @@ const WORDS = JSON.parse(
         timeH.innerHTML = display
       }
         document.getElementById("cs").innerHTML = "Score: 0";
-        currentScore = 0
-        displayLetters()
-        reset()
+
         
     }
     
@@ -226,6 +234,8 @@ const WORDS = JSON.parse(
     function restartGame() {
         currentWords = [];
         currentWord = ""
+        pointers = {}
+        reset();
         resetTable();
         endScreen.style.display = "none";
         timeH.style.color = "black";
@@ -236,33 +246,35 @@ const WORDS = JSON.parse(
 
     document.addEventListener("keyup", (e) => {
         if (count > 6) {
-            document.getElementById("s").innerHTML = "p0";
             return
         }
         let pressedKey = (e.key)
         let strPressedKey = String(pressedKey)
         // issue with delete
         if (strPressedKey === "Backspace" && count !== 0) {
-            document.getElementById("s").innerHTML = "P2";
             removeLetter(count)
             return
         }
         else if (strPressedKey === "Enter") {
-            document.getElementById("s").innerHTML = "P3";
             enter()
             return
         }
         // FIGURE OUT DUPLICATES
         if (pressedKey < 97 || pressedKey > 122) {
-            document.getElementById("s").innerHTML = "p9";
             return
         } else if (!(strPressedKey in lettertoindex) || currentWord.includes(strPressedKey)) {
-            document.getElementById("s").innerHTML = "p7";
             return
         }
         else {
-            document.getElementById("s").innerHTML = "PRESSED";
             display(lettertoindex[pressedKey])
+            /*if (lettertoindex[strPressedKey].length == 1)
+                display(lettertoindex[strPressedKey][0])
+            else {
+                display(lettertoindex[pressedKey][pointers[strPressedKey]])
+                pointers[strPressedKey] += 1
+            }
+            document.getElementById("cs").innerHTML = pointers[strPressedKey]
+*/
         }
     })
     
@@ -291,12 +303,15 @@ const WORDS = JSON.parse(
             //var randomChar = CHARARRAY[Math.floor( Math.random() * CHARARRAY.length)]
             letters[i-1] = randomChar
             document.getElementById(id).innerHTML = randomChar
-            if (randomChar.toLowerCase() in lettertoindex) {
-                lettertoindex[randomChar.toLowerCase()] = i
+          /*  if (randomChar.toLowerCase() in lettertoindex) {
+                lettertoindex[randomChar.toLowerCase()].append(i)
             }
             else {
-                lettertoindex[randomChar.toLowerCase()] = i
-            }
+                lettertoindex[randomChar.toLowerCase()] = [i]
+                pointers[randomChar.toLowerCase()] = 0
+            }*/
+            lettertoindex[randomChar.toLowerCase()] = i
+
     }
 }
     
@@ -310,6 +325,9 @@ const WORDS = JSON.parse(
             document.getElementById("cs").innerHTML = String("Score: " + currentScore);
             currentWords.push({word: currentWord, score: scores[count-1]});
             words[currentWord] = 1;
+            for (var key in pointers) {
+                pointers[key] = 0
+            }
             setTimeout(function(){
                 document.getElementById("s").innerHTML = ''
                 document.getElementById("s").style.backgroundColor =  'rgb(248, 240, 128)';
